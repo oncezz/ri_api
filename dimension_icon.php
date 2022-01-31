@@ -19,7 +19,7 @@ $result[4]['icon'] = 'dimension05.svg';
 $result[5]['icon'] = 'dimension06.svg';
 $result[6]['icon'] = 'dimension07.svg';
 
-if($type == 'A'){
+if($type == 'Sustainable'){
   
     $result[0]['indicator'] = ['Exports to GDP', 'Imports to GDP', 'Import tarriffs','FDI inflows to GDP', 'FDI outflows to GDP'];
     $result[1]['indicator'] = ['Cross-border portfolio liablilities and assests to GDP', 'Deposit rates dispersion','Share price index correlation'];
