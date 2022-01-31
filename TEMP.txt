@@ -1,0 +1,124 @@
+    <!-- Result -->
+    <div v-if="showResult" class="q-pa-md">
+      <!-- 4 bar result -->
+      <div>
+        <hr />
+
+        <div>
+          <four-bar
+            :type="input.type"
+            :year="input.year.max"
+            :data="fourBarData"
+          ></four-bar>
+        </div>
+        <hr />
+      </div>
+      <!-- select type btn -->
+      <div align="center">
+        <div>Select desired level of disaggregation</div>
+        <br />
+        <div class="row justify-center">
+          <div align="center">
+            <div
+              :class="viewType == 'A' ? 'btnGreen' : 'btnGrey'"
+              @click="changeViewA()"
+              class="cursor-pointer"
+            >
+              By country
+            </div>
+          </div>
+          <div class="q-px-md" align="center">
+            <div
+              :class="viewType == 'B' ? 'btnGreen' : 'btnGrey'"
+              @click="changeViewB()"
+              class="cursor-pointer"
+            >
+              By dimension
+            </div>
+          </div>
+        </div>
+        <br />
+        <!--///////////// view A Type  ///////////-->
+        <div v-if="viewType == 'A'">
+          <div>See how each country is integrated with the group</div>
+          <!-- chart view  -->
+          <div class="row items-end">
+            <div class="col-1"></div>
+            <div class="q-px-xs" align="center">
+              <div
+                :class="showTypeChart == 'A' ? 'btnGreen' : 'btnGrey'"
+                @click="chartView('A')"
+                class="cursor-pointer"
+              >
+                Index
+              </div>
+            </div>
+            <div class="q-px-xs" align="center">
+              <div
+                :class="showTypeChart == 'B' ? 'btnGreen' : 'btnGrey'"
+                @click="chartView('B')"
+                class="cursor-pointer"
+              >
+                Data availablity
+              </div>
+            </div>
+            <div class="q-px-xs" align="center">
+              <div
+                :class="showTypeChart == 'C' ? 'btnGreen' : 'btnGrey'"
+                @click="chartView('C')"
+                class="cursor-pointer"
+              >
+                Weights
+              </div>
+            </div>
+            <div class="col"></div>
+            <div>
+              <u>Click here to see this group’s availablility matrix</u>
+            </div>
+            <div class="col-1"></div>
+          </div>
+          <br />
+          <!-- Line chart for by country  -->
+          <main-linechart
+            v-if="showTypeChart == 'A'"
+            :input="input"
+            :data="lineChartByCountryData"
+          ></main-linechart>
+          <data-availbar
+            v-else-if="showTypeChart == 'B'"
+            :data="countryPartnerList"
+            :year="input.year.max"
+          ></data-availbar>
+          <weight-bycountry
+            v-else
+            :data="countryPartnerList"
+            :year="input.year.max"
+          ></weight-bycountry>
+          <economy-circle
+            :type="input.type"
+            :data="countryPartnerList"
+            :year="input.year.max"
+          ></economy-circle>
+        </div>
+        <!--///////////// view B Type  ///////////-->
+        <div v-else>
+          <div>See how each dimension is integrated with the group</div>
+          <!-- chart view  -->
+          <dimension-linechart
+            :input="input"
+            :data="lineChartByDimensionData"
+          ></dimension-linechart>
+          <hr />
+          <dimension-groupbar
+            :input="input"
+            :data="lineChartByDimensionData"
+          ></dimension-groupbar>
+
+          <dimension-indicator
+            :input="input"
+            :data="lineChartByDimensionData"
+          ></dimension-indicator>
+        </div>
+      </div>
+      <br />
+    </div>
