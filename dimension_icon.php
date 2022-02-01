@@ -4,12 +4,12 @@ $_POST = json_decode(file_get_contents("php://input"),true);
 $type = $_POST['type'];
 
 $result[0]['name']= "Trade and investment";
-$result[1]['name']="Financial integration";
-$result[2]['name']= 'Regional value chain integration';
-$result[3]['name'] = 'Infrastructure integration';
+$result[1]['name']="Financial";
+$result[2]['name']= 'Regional value chain';
+$result[3]['name'] = 'Infrastructure';
 $result[4]['name'] = 'Movement of peolple';
 $result[5]['name']= 'Regulatory cooperation';
-$result[6]['name']= 'Digital economy integration';
+$result[6]['name']= 'Digital economy';
 
 $result[0]['icon']="dimension01.svg";
 $result[1]['icon']= "dimension02.svg";
@@ -18,6 +18,16 @@ $result[3]['icon'] = 'dimension04.svg';
 $result[4]['icon'] = 'dimension05.svg';
 $result[5]['icon'] = 'dimension06.svg';
 $result[6]['icon'] = 'dimension07.svg';
+
+$result[0]['color']='#64C1E8';
+$result[1]['color']= '#D85B63';
+$result[2]['color']='#D680AD';
+$result[3]['color'] = '#5C5C5C';
+$result[4]['color'] = '#C0BA80';
+$result[5]['color'] = '#FDC47D';
+$result[6]['color'] = '#EA3B46';
+
+
 
 if($type == 'Sustainable'){
   
