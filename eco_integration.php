@@ -17,7 +17,7 @@ for($i=0;$i<sizeof($countryFullList);$i++){
         $genValue = rand(1,99)/100;        
         array_push($indexList, $genValue);
     }
-    $result[$i]['value']= $indexList;
+    $result[$i]['data']= $indexList;
     $result[$i]['lastValue'] = $indexList[$diffYear -1];
 }
 echo json_encode($result);
