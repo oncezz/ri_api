@@ -13,8 +13,8 @@ $result = [];
 for($i=0;$i<sizeof($countryFullList);$i++){
     $indexList = [];
     $result[$i]['name'] =  $countryFullList[$i]['label'];
-    for($year = 0; $year <$diffYear;$year ++){
-        $genValue = rand(1,99)/100;        
+    for($year = 0; $year <=$diffYear;$year ++){
+        $genValue = rand(50,99)/100;        
         array_push($indexList, $genValue);
     }
     $result[$i]['data']= $indexList;
