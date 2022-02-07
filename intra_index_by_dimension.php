@@ -18,7 +18,7 @@ for($i=0;$i<sizeof($dimension);$i++){
         array_push($indexList, $genValue);
     }
     $result[$i]['data']= $indexList;
-    $result[$i]['lastValue'] = $indexList[$diffYear -1];
+    $result[$i]['lastValue'] = $indexList[$diffYear];
 }
 echo json_encode($result);
 ?>
