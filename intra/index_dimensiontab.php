@@ -10,8 +10,8 @@ $type = $input["type"];
 $yearEnd = $input['year']['max'];
 $yearStart = $input['year']['min'];
 $diffYear = floor(($input['year']['max'] - $input['year']['min'])/2);
-$series1 = "test";
-
+$series1 = $yearStart . "-" . ($yearStart + $diffYear);
+$series2 = ($yearEnd - $diffYear) . "-" . $yearEnd;
 
 if($type == 'Sustainable'){
     if($selected == "Trade and investment"){
@@ -50,12 +50,18 @@ else {
 
 $numIndication = sizeof($subData);
 
-
+$result[0]['name'] = $series1;
 $result[0]['color'] = "#2381B8";
-for($i=0; $i< $numIndication;$i++){
-    $tempData[$i]= rand(60,95); //plus one for yourgroup
+for($i=0; $i<= $numIndication;$i++){
+    $tempData[$i]= rand(60,95)/100; //plus one for yourgroup
 }
 $result[0]['data'] = $tempData;
 
+$result[1]['name'] = $series2;
+$result[1]['color'] = "#13405A";
+for($i=0; $i<= $numIndication;$i++){
+    $tempData[$i]= rand(60,95)/100; //plus one for yourgroup
+}
+$result[1]['data'] = $tempData;
 echo json_encode($result);
 ?>
