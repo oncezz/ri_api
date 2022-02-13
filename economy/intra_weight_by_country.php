@@ -5,9 +5,15 @@ $countryFullList=$_POST['countryFullList'];
 $input=$_POST['input'];
 
 $result = [];
-for($i=0;$i<sizeof($countryFullList);$i++){
-    $result[$i]['name'] =  $countryFullList[$i]['label'];
-    $result[$i]['data'] = rand(10,35)/100;
+for($year = 0; $year <=$diffYear;$year ++){
+    if($year == 0){
+        $genValue = rand(5,30)/100;  
+        $oldValue = $genValue;  
+    }else {
+        $genValue = rand(1,8)/100 + $oldValue;
+        $oldValue = $genValue;
+    }
+    array_push($indexList, (float)number_format($genValue,2));
 }
 echo json_encode($result);
 ?>

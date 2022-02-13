@@ -1,5 +1,5 @@
 <?php
-require_once('connection.php');
+require_once('../connection.php');
 $_POST = json_decode(file_get_contents("php://input"),true);
 $countryFullList=$_POST['countryFullList'];
 $input=$_POST['input'];
@@ -14,8 +14,14 @@ for($i=0;$i<sizeof($dimension);$i++){
     $indexList = [];
     $result[$i]['name'] =  $dimension[$i];
     for($year = 0; $year <=$diffYear;$year ++){
-        $genValue = rand(20,99)/100;        
-        array_push($indexList, $genValue);
+        if($year == 0){
+            $genValue = rand(5,30)/100;  
+            $oldValue = $genValue;  
+        }else {
+            $genValue = rand(1,8)/100 + $oldValue;
+            $oldValue = $genValue;
+        }
+        array_push($indexList, (float)number_format($genValue,2));
     }
     $result[$i]['data']= $indexList;
     $result[$i]['lastValue'] = $indexList[$diffYear];
