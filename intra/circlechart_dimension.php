@@ -13,14 +13,14 @@ $result[5]['name']="Infrastructure";
 $result[6]['name']="Movement of People";
 $result[7]['name']="Regional Cooperation";
 
-$result[0]['value']=.91;
-$result[1]['value']=.90;
-$result[2]['value']=.83;
-$result[3]['value']=.73;
-$result[4]['value']=.71;
-$result[5]['value']=.62;
-$result[6]['value']=.6;
-$result[7]['value']=.4;
+$result[0]['value']=rand(93,99)/100;
+$result[1]['value']=rand(85,95)/100;
+$result[2]['value']=rand(80,85)/100;
+$result[3]['value']=rand(75,80)/100;
+$result[4]['value']=rand(65,75)/100;
+$result[5]['value']=rand(55,65)/100;
+$result[6]['value']=rand(45,55)/100;
+$result[7]['value']=rand(30,45)/100;
 
 echo json_encode($result);
 ?>
