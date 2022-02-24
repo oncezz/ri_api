@@ -1,9 +1,11 @@
 <?php
-require_once('connection.php');
+require_once('../connection.php');
 $_POST = json_decode(file_get_contents("php://input"),true);
 $economic = $_POST['economic'];
+$reporting = $_POST['reporting'];
 $year = $_POST['year'];
 $type = $_POST['type'];
+$name=$_POST['name'];
 
 $result[0]['name'] = 'China-Mongolia';
 $result[0]['value']= 0.91;
@@ -13,7 +15,7 @@ $result[1]['name'] = 'ASEAN';
 $result[1]['value']= 0.84;
 $result[1]['own']= false;
 
-$result[2]['name'] = 'Your group';
+$result[2]['name'] = $name;
 $result[2]['value']= 0.74;
 $result[2]['own']= true;
 

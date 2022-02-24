@@ -5,6 +5,7 @@ $partner = $_POST['partner'];
 $reporting = $_POST['reporting'];
 $year = $_POST['year'];
 $type = $_POST['type'];
+$name=$_POST['name'];
 
 $result[0]['name'] = 'China-Mongolia';
 $result[0]['value']= 0.81;
@@ -14,7 +15,7 @@ $result[1]['name'] = 'ASEAN';
 $result[1]['value']= 0.78;
 $result[1]['own']= false;
 
-$result[2]['name'] = 'Your group';
+$result[2]['name'] = $name;
 $result[2]['value']= 0.71;
 $result[2]['own']= true;
 
