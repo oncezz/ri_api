@@ -29,7 +29,7 @@ $result[6]['color'] = '#EA3B46';
 
 
 
-if($type == 'Sustainable'){
+if($type == 'Conventional'){
   
     $result[0]['indicator'] = ['Exports to GDP', 'Imports to GDP', 'Import tarriffs','FDI inflows to GDP', 'FDI outflows to GDP'];
     $result[1]['indicator'] = ['Cross-border portfolio liablilities and assests to GDP', 'Deposit rates dispersion','Share price index correlation'];
