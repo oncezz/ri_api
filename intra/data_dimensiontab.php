@@ -13,7 +13,7 @@ $diffYear = floor(($input['year']['max'] - $input['year']['min'])/2);
 $series1 = "test";
 
 
-if($type == 'Sustainable'){
+if($type == 'Conventional'){
     if($selected == "Trade and investment"){
         $subData =  ['Exports to GDP', 'Imports to GDP', 'Import tarriffs','FDI inflows to GDP', 'FDI outflows to GDP']; 
     } else if($selected == "Financial"){

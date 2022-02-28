@@ -13,7 +13,7 @@ $diffYear = floor(($input['year']['max'] - $input['year']['min'])/2);
 $series1 = $yearStart . "-" . ($yearStart + $diffYear);
 $series2 = ($yearEnd - $diffYear) . "-" . $yearEnd;
 
-if($type == 'Sustainable'){
+if($type == 'Conventional'){
     if($selected == "Trade and investment"){
         $subData =  ['Exports to GDP', 'Imports to GDP', 'Import tarriffs','FDI inflows to GDP', 'FDI outflows to GDP']; 
     } else if($selected == "Financial"){
@@ -53,7 +53,7 @@ $numIndication = sizeof($subData);
 $result[0]['name'] = $series1;
 $result[0]['color'] = "#2381B8";
 for($i=0; $i<= $numIndication;$i++){
-    $tempData[$i]= rand(60,95)/100; //plus one for yourgroup
+    $tempData[$i]= rand(60,95)/100; //plus one for yourgroup  &set avg at Your group
 }
 $result[0]['data'] = $tempData;
 
