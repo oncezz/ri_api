@@ -53,7 +53,7 @@ $numIndication = sizeof($subData);
 
 $result[0]['color'] = "#2381B8";
 for($i=0; $i< $numIndication;$i++){
-    $tempData[$i]= rand(60,95); //plus one for yourgroup
+    $tempData[$i]= rand(60,95)/100;
 }
 $result[0]['data'] = $tempData;
 
