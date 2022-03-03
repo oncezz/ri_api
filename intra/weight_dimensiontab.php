@@ -52,6 +52,7 @@ $numIndication = sizeof($subData);
 
 
 $result[0]['color'] = "#2381B8";
+$result[0]['name'] = "weight";
 for($i=0; $i< $numIndication;$i++){
     $tempData[$i]= rand(60,95)/100;
 }
