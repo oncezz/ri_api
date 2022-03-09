@@ -4,6 +4,7 @@ $_POST = json_decode(file_get_contents("php://input"),true);
 $countryFullList=$_POST['countryFullList'];
 $input=$_POST['input'];
 $selected=$_POST['selected'];
+$yourGroup=$_POST['yourGroupName'];
 
 
 $result[0]['y']=rand(30,99)/100;
@@ -19,7 +20,7 @@ $result[0]['name']="China";
 $result[1]['name']="Vietnam";
 $result[2]['name']="Thailand";
 $result[3]['name']="South Korea";
-$result[4]['name']="Your group";
+$result[4]['name']=$yourGroup;
 $result[5]['name']="Spain";
 $result[6]['name']="Mlaysia";
 $result[7]['name']="Peru";
