@@ -5,7 +5,7 @@ $selected = $_POST['selected'];
 $input=$_POST['input'];
 $index = $_POST['index'];
 
-if($input['type']=="Sustainable"){
+if($input['type']=="Conventional"){
     if($index==0){
         $gendata = 5;
     } else if($index ==1){
