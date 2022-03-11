@@ -7,11 +7,6 @@ $input = $_POST['input'];
 $selected = $_POST['selected'];
 
 $type = $input["type"];
-$yearEnd = $input['year']['max'];
-$yearStart = $input['year']['min'];
-$diffYear = floor(($input['year']['max'] - $input['year']['min'])/2);
-$series1 = "test";
-
 
 if($type == 'Conventional'){
     if($selected == "Trade and investment"){
@@ -69,6 +64,5 @@ for($i=0; $i< $numIndication;$i++){
     $tempData[$i]['catName'] = $subData[$i];
     $tempData[$i]['catNameLower'] = $subDataLower[$i];
 }
-
 echo json_encode($tempData);
 ?>

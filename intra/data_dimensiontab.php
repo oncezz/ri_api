@@ -7,10 +7,6 @@ $input = $_POST['input'];
 $selected = $_POST['selected'];
 
 $type = $input["type"];
-$yearEnd = $input['year']['max'];
-$yearStart = $input['year']['min'];
-$diffYear = floor(($input['year']['max'] - $input['year']['min'])/2);
-$series1 = "test";
 
 
 if($type == 'Conventional'){
