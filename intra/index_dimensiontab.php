@@ -39,8 +39,8 @@ else {
     } else if($selected == 'Regulatory cooperation'){
         $subData = ['Sustainable regional FTA score', 'Sustainable regional IIA score' , 'Average intraregional rule of law index score', 'SDG trade regulatory distance from regional partners'];
     } else if($selected ==  'Digital economy'){
-        $subData =['Sustainable regional FTA score', 'Sustainable regional IIA score' , 'Average intraregional rule of law index score', 'SDG trade regulatory distance from regional partners'];
-    }
+        $subData = ['Average intraregional secure Internet servers','Average intraregional proportion of households with Internet access', 'Average intraregional share of female population with financial institution or mobile money account', 'Average intraregional share of female population that use Internet for online purchase'];
+     }
 }
 
 $numIndication = sizeof($subData);
