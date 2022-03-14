@@ -3,11 +3,12 @@ require_once('../connection.php');
 $_POST = json_decode(file_get_contents("php://input"),true);
 $selected = $_POST['selected'];
 $input=$_POST['input'];
-$result[0] = [];
-$result[1] = [];
-for($i=1;$i<=7;$i++){
-    array_push( $result[0],rand(30,70));
-    array_push( $result[1],rand(30,70));
+$dimension=$_POST['indicator'];
+
+for($i=0;$i<sizeof($dimension);$i++){
+    $result[$i]['data'][0]=rand(30,99);
+    $result[$i]['data'][1]=rand(30,99);
+    $result[$i][name]=$dimension[$i]['name'];
 }
 echo json_encode($result);
 ?>
