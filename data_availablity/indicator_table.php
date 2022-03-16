@@ -40,13 +40,19 @@ for($i=0;$i<sizeof($report);$i++){
 
     $result[$i]['iso']=$report[$i]['iso'];                        
     $result[$i]['label']=$report[$i]['label'];
+    $sumPartner=0;
     for($j=0;$j<sizeof($partner);$j++){
         $result[$i]['partner'][$j]['iso']=$partner[$j]['iso'];
         $result[$i]['partner'][$j]['label']=$partner[$j]['label'];
+
+        $sumDimension=0;
         for($m=0;$m<sizeof($dimensionData);$m++){
             $result[$i]['partner'][$j]['dimension'][$m]['label']=$dimensionData[$m]['label'];
+            $result[$i]['partner'][$j]['dimension'][$m]['iso']=m+1;
+            $sumIndicator=0;
             for($n=0;$n<sizeof($dimensionData[$m]['indicator']);$n++){
                 $result[$i]['partner'][$j]['dimension'][$m]['indicator'][$n]['label']=$dimensionData[$m]['indicator'][$n];
+                $result[$i]['partner'][$j]['dimension'][$m]['indicator'][$n]['iso']=n+1;
                 if($report[$i]['iso']==$partner[$j]['iso']){
                     $result[$i]['partner'][$j]['dimension'][$m]['indicator'][$n]['data']=-99 ;                   // return -  mean same country
                 }
@@ -59,8 +65,12 @@ for($i=0;$i<sizeof($report);$i++){
                         $result[$i]['partner'][$j]['dimension'][$m]['indicator'][$n]['data']=100;
                     }
                 }
+                $sumIndicator+= $result[$i]['partner'][$j]['dimension'][$m]['indicator'][$n]['data'];
             }
+            $result[$i]['partner'][$j]['dimension'][$m]['avg']=$sumIndicator/sizeof($dimensionData[$m]['indicator']);
+            $sumDimension+=$result[$i]['partner'][$j]['dimension'][$m]['avg'];
         }
+        $result[$i]['partner'][$j]['avg']=$sumDimension/sizeof($dimensionData);
     }
 }
 
