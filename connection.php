@@ -9,4 +9,22 @@ header('Content-type: application/json');
 
 date_default_timezone_set("Asia/Bangkok");
 
+require("Medoo.php");
+ 
+// Using Medoo namespace
+use Medoo\Medoo;
+ 
+
+
+$db = new Medoo([
+	// required
+	'database_type' => 'mysql',
+	'database_name' => 'hotel',
+	'server' => 'localhost',
+	'port'=>3306,
+	'username' => 'root',
+	'password' => '12345678',
+	"charset" => "utf8",
+]);
+
 ?>
