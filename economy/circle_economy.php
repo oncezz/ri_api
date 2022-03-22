@@ -14,9 +14,9 @@ $type = $_POST['type'];
 // $type = "Sustatain";
 
 if($type == "Conventional"){
-    $table = "ri_intra_con";
+    $table = "ri_eco_con";
 } else {
-    $table = "ri_intra_sus";
+    $table = "ri_eco_sus";
 }
 
 $result = $db->count($table,[
