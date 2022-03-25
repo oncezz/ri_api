@@ -33,6 +33,7 @@ for($i=0;$i<sizeof($reporting);$i++){
         }
     }
 }
+// $total = sizeof($reporting)*sizeof($partner);
 // echo $total;
 $percent = round($result/$total *100);
 echo $percent;
