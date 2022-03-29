@@ -31,8 +31,8 @@ for($i=0;$i<sizeof($countryMap);$i++){
         "partner"=>$countryMap,
         "year"=>$j
         ]);
-    $result[$i]['data'][$j-$yearMin]=$avg;
-    // $result[$i]['data'][$j-$yearMin]=round($avg,2);
+    // $result[$i]['data'][$j-$yearMin]=$avg;
+    $result[$i]['data'][$j-$yearMin]=round($avg,4);
     
     }
     $result[$i]['name']=$countryFullList[$i]['label'];
