@@ -1,44 +1,52 @@
 <?php
+function returnMap($v)
+{
+    $str="";
+    $str=$str . "(";
+    for($i=0;$i<sizeof($v);$i++){
+        $str=$str . "'" . $v[$i] . "'";
+    if($i!=sizeof($v)-1){
+        $str=$str . ",";
+    }
+  }
+  $str=$str .")";
+  return $str;
+}
+function returnNum($v)
+{
+    $str="";
+    $str=$str . "(";
+    for($i=0;$i<sizeof($v);$i++){
+        $str=$str . $v[$i] ;
+    if($i!=sizeof($v)-1){
+        $str=$str . ",";
+    }
+  }
+  $str=$str .")";
+  return $str;
+}
 require_once('../connection.php');
 $_POST = json_decode(file_get_contents("php://input"),true);
 $partner = $_POST['partner'];
 $reporting=$_POST['reporting'];
 $type = $_POST['type'];
 $dimension=$_POST['dimension'];
-// echo $type;
-// $type = "Sustatain";
+
 if($type == "Conventional"){
     $table = "ri_build_con";
 } else {
     $table = "ri_build_sus";
 }
-$dimSize=sizeof($dimension);
-$total = 0;
-$result=0;
 
-$cloneTable = $db->select($table,[
-    "reporting","partner","dim"
-],[
-    "reporting"=>$reporting,
-    "partner"=>$partner,
-    "dim"=>$dimension
-]);
-
-// for($i=0;$i<sizeof($reporting);$i++){
-//     for($j=0;$j<sizeof($partner);$j++){
-//         if($reporting[$i]!=$partner[$j]){
-//             $total++;
-//             $eachPair = $db->count($table,[
-//                 "reporting"=>$reporting[$i],
-//                 "partner"=>$partner[$j],
-//                 "dim"=>$dimension
-//             ]);
-//             if($eachPair/$dimSize>=0.5){
-//                 $result++;
-//             }
-//         }
-//     }
-// }
-// $percent = round($result/($total) *100);
+$sql="SELECT `reporting`,`partner`,COUNT('dim') AS dimall FROM " . $table . "  WHERE `reporting` IN ". returnMap($reporting) . " AND `partner` IN " . returnMap($partner) . " AND `dim` IN " . returnNum($dimension) . " GROUP BY reporting,partner";
+$cloneTable = $db->query($sql)->fetchAll();
+// $cloneTable = $db->debug()->select($table,[
+//     "reporting","partner","dim"
+// ],[
+//     "reporting"=>$reporting,
+//     "partner"=>$partner,
+//     "dim"=>$dimension
+// ]);
+// print_r($cloneTable);
 echo json_encode($cloneTable);
 ?>

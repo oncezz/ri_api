@@ -1,30 +1,38 @@
 <?php
 require_once('../connection.php');
 $_POST = json_decode(file_get_contents("php://input"),true);
-$countryFullList=$_POST['countryFullList'];
+$countryReportList=$_POST['countryReportList'];
+$countryPartnerList=$_POST['countryPartnerList'];
+$reportMap=$_POST['reportMap'];
+$partnerMap=$_POST['partnerMap'];
 $input=$_POST['input'];
 $yearMax = $input['year']['max'];
 $yearMin = $input['year']['min'];
-$diffYear = $yearMax - $yearMin;
+$type=$input['type'];
 
-// print_r($input['year']['max']);
-// print_r($countryFullList);
+
 $result = [];
-for($i=0;$i<sizeof($countryFullList);$i++){
-    $indexList = [];
-    $result[$i]['name'] =  $countryFullList[$i]['label'];
-    for($year = 0; $year <=$diffYear;$year ++){
-        if($year == 0){
-            $genValue = rand(5,30)/100;  
-            $oldValue = $genValue;  
-        }else {
-            $genValue = rand(1,8)/100 + $oldValue;
-            $oldValue = $genValue;
-        }
-        array_push($indexList, (float)number_format($genValue,2));
+if($type == "Sustainable"){
+    $table = "ri_5bar_eco_sus";
+} else {
+    $table = "ri_5bar_eco_con";
+}
+
+for($i=0;$i<sizeof($partnerMap);$i++){
+    for($j=$yearMin;$j<=$yearMax;$j++){
+
+    $avg=$db->avg($table,"score",[
+        "reporter"=>$reportMap,
+        "partner"=>$partnerMap[$i],
+        "year"=>$j
+        ]);
+    // $result[$i]['data'][$j-$yearMin]=$avg;
+    $result[$i]['data'][$j-$yearMin]=round($avg,4);
+    
     }
-    $result[$i]['data']= $indexList;
-    $result[$i]['lastValue'] = $indexList[$diffYear];
+    $result[$i]['name']=$countryPartnerList[$i]['label'];
+    $result[$i]['lastValue']=$result[$i]['data'][sizeof($result[$i]['data'])-1];
 }
 echo json_encode($result);
+
 ?>

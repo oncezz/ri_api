@@ -5,11 +5,6 @@ $countryFullList=$_POST['countryFullList'];
 $countryMap=$_POST['countryMap'];
 $input=$_POST['input'];
 
-
-
-
-
-
 $type=$input['type'];
 $result = [];
 $sizeCountry=sizeof($countryMap);
@@ -31,7 +26,7 @@ for($i=0;$i<$sizeCountry;$i++){
        
         ]);
     $result[$i]['data']=$data/($sizeCountry*2-2)*100;
-    // $result[$i]['data'][$j-$yearMin]=round($avg,2);
+  
     $result[$i]['name']=$countryFullList[$i]['label'];
 }
 // $result[$i]['data']=$data/(sizeCountry*(sizeCountry-1));
