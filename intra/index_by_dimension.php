@@ -2,30 +2,46 @@
 require_once('../connection.php');
 $_POST = json_decode(file_get_contents("php://input"),true);
 $countryFullList=$_POST['countryFullList'];
+$countryMap=$_POST['countryMap'];
 $input=$_POST['input'];
 $yearMax = $input['year']['max'];
 $yearMin = $input['year']['min'];
 $diffYear = $yearMax - $yearMin;
-$dimension = ['Trade and Investment', 'Financial', 'Regional Value chains', 'Infrastructure','Movement of people', 'Regulatory cooperation','Digital economy'];
-// print_r($input['year']['max']);
-// print_r($countryFullList);
-$result = [];
-for($i=0;$i<sizeof($dimension);$i++){
-    $indexList = [];
-    $result[$i]['name'] =  $dimension[$i];
-    for($year = 0; $year <=$diffYear;$year ++){
-        if($year == 0){
-            $genValue = rand(5,30)/100;  
-            $oldValue = $genValue;  
-        }else {
-            $genValue = rand(1,8)/100 + $oldValue;
-            $oldValue = $genValue;
-        }
-        array_push($indexList, (float)number_format($genValue,2));
-    }
-    $result[$i]['data']= $indexList;
-    $result[$i]['lastValue'] = (float)number_format($indexList[$diffYear],2);
+$type=$input['type'];
+$dimension = ['Trade and investment', 'Financial', 'Regional value chains', 'Infrastructure','Movement of people', 'Regulatory cooperation','Digital economy'];
+
+if($type == "Sustainable"){
+    $table = "ri_intra_sus_alldim";
+} else {
+    $table = "ri_intra_con_alldim";
 }
+
+$result =$db->select($table,[
+    "dimension",
+    "score",
+    "year"
+],[
+    "reporter"=>$countryMap,
+    "partner"=>$countryMap,
+    "year[<>]"=>[$yearMin,$yearMax]
+]);
+// for($i=0;$i<sizeof($dimension);$i++){
+//     $dim=$i+1;
+//     $indexList = [];
+//     $result[$i]['name'] =  $dimension[$i];
+//     for($year = $yearMin; $year <=$yearMax;$year ++){
+//         $tempScore=$db->avg($table,"score",[
+//             "reporter"=>$countryMap,
+//             "partner"=>$countryMap,
+//             "dimension"=>$dim,
+//             "year"=>$year
+//         ]);
+
+//         array_push($indexList, $tempScore);
+//     }
+//     $result[$i]['data']= $indexList;
+//     $result[$i]['lastValue'] = (float)number_format($indexList[$diffYear],2);
+// }
 echo json_encode($result);
 ?>
 
