@@ -8,21 +8,21 @@ $yearMax = $input['year']['max'];
 $yearMin = $input['year']['min'];
 $diffYear = $yearMax - $yearMin;
 $type=$input['type'];
-if($type == "Sustainable"){
-    $table = "ri_intra_sus_alldim";
-} else {
-    $table = "ri_intra_con_alldim";
-}
 
-$result =$db->select($table,[
-    "dimension",
-    "score",
-    "year"
-],[
-    "reporter"=>$countryMap,
-    "partner"=>$countryMap,
-    "year[<>]"=>[$yearMin,$yearMax]
-]);
+if($type == "Sustainable"){
+    $table = "ri_5bar_intra_sus";
+} else {
+    $table = "ri_5bar_intra_con";
+}
+$result=[];
+for($i=$yearMin;$i<=$yearMax;$i++){
+    $tempScore=$db->avg($table,"score",[
+                    "reporter"=>$countryMap,
+                    "partner"=>$countryMap,
+                    "year"=>$i
+                ]);
+     array_push($result, round($tempScore,4));
+}
 
 echo json_encode($result);
 ?>
