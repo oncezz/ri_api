@@ -1,14 +1,30 @@
 <?php
 require_once('../connection.php');
 $_POST = json_decode(file_get_contents("php://input"),true);
-$countryFullList=$_POST['countryFullList'];
 $input=$_POST['input'];
-$dimension = ['Trade and Investment', 'Financial', 'Regional Value chains', 'Infrastructure','Movement of people', 'Regulatory cooperation','Digital economy'];
+$countryReportList=$_POST['countryReportList'];
+$reportMap=$_POST['reportMap'];
+$countryPartnerList=$_POST['countryPartnerList'];
+$partnerMap=$_POST['partnerMap'];
 
-$result = [];
-for($i=0;$i<sizeof($dimension);$i++){
-    $result[$i]['name'] =  $dimension[$i];
-    $result[$i]['data'] = rand(40,90);
+$yearMax = $input['year']['max'];
+$yearMin = $input['year']['min'];
+
+$type=$input['type'];
+if($type == "Conventional"){
+    $table = "ri_build_con";
+} else {
+    $table = "ri_build_sus";
 }
+
+$result = $db->select($table,[
+    "reporting",
+    "partner",
+    "dim"
+],[
+    "reporting"=>$reportMap,
+    "partner"=>$partnerMap,
+]);
+
 echo json_encode($result);
 ?>
