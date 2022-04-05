@@ -4,8 +4,8 @@ $_POST = json_decode(file_get_contents("php://input"),true);
 $countryFullList=$_POST['countryFullList'];
 $countryMap=$_POST['countryMap'];
 $input=$_POST['input'];
-
 $type=$input['type'];
+
 $result = [];
 $sizeCountry=sizeof($countryMap);
 if($type == "Conventional"){
