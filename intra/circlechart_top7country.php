@@ -4,35 +4,41 @@ $_POST = json_decode(file_get_contents("php://input"),true);
 $countryFullList=$_POST['countryFullList'];
 $input=$_POST['input'];
 $selected=$_POST['selected'];
-$yourGroup=$_POST['yourGroupName'];
+$countryMap=$_POST['countryMap'];
 
+$selectCountry=$selected['label'];
+$year=$input['year']['max'];
+$type=$input['type'];
 
-$result[0]['y']=rand(30,99)/100;
-$result[1]['y']=rand(30,99)/100;
-$result[2]['y']=rand(30,99)/100;
-$result[3]['y']=rand(30,99)/100;
-$result[4]['y']=rand(30,99)/100;
-$result[5]['y']=rand(30,99)/100;
-$result[6]['y']=rand(30,99)/100;
-$result[7]['y']=rand(30,99)/100;
+if($type == "Conventional"){
+    $table = "ri_5bar_intra_con";
+} else {
+    $table = "ri_5bar_intra_sus";
+}
 
-$result[0]['name']="China";
-$result[1]['name']="Vietnam";
-$result[2]['name']="Thailand";
-$result[3]['name']="South Korea";
-$result[4]['name']=$yourGroup;
-$result[5]['name']="Spain";
-$result[6]['name']="Mlaysia";
-$result[7]['name']="Peru";
+for($i=0;$i<sizeof($countryMap);$i++){
+    $avgData[$i]['y']=$db->avg($table,"score",[
+        "reporter"=>[$selected['iso'],$countryMap[$i]],
+        "partner"=>[$selected['iso'],$countryMap[$i]],
+        "year"=>$year,
+    ]);
+    $avgData[$i]['y']= round($avgData[$i]['y'],3);
+    $avgData[$i]['name']=$countryFullList[$i]['label'];
+}
+rsort($avgData);
 
-// $result[0]['color']="#8DBDD9";
-// $result[1]['color']="#C0E0DB";
-// $result[2]['color']="#E8B0CB";
-// $result[3]['color']="#EB1E63";
-$result[4]['color']="#F99704";
-// $result[5]['color']="#2D9687";
-// $result[6]['color']="#2381B8";
-// $result[7]['color']="#C4C4C4";
-
+for($i=0;$i<sizeof($avgData);$i++){
+    if($avgData[$i]['name']==$selectCountry){
+        $indexSelect=$i;
+    }
+}
+$result=[];
+$resultSize=7;
+if(sizeof($countryMap)<8){
+    $resultSize=sizeof($countryMap);
+}
+for($i=0;$i<$resultSize;$i++){
+    $result[$i]=$avgData[$i];
+}
 echo json_encode($result);
 ?>
