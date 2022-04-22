@@ -22,7 +22,7 @@ for($i=0;$i<sizeof($countryMap);$i++){
         "partner"=>[$selected['iso'],$countryMap[$i]],
         "year"=>$year,
     ]);
-    $avgData[$i]['y']= round($avgData[$i]['y'],3);
+    $avgData[$i]['y']= round($avgData[$i]['y'],4);
     $avgData[$i]['name']=$countryFullList[$i]['label'];
 }
 rsort($avgData);
