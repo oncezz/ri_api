@@ -11,12 +11,12 @@ $year[1]=$input['year']['max'];
 $type=$input['type'];
 
 if($type == "Sustainable"){
-    $table = "ri_5bar_buildyourown_sus";
+    $table = "ri_intra_allindi_sus";
 } else {
-    $table = "ri_5bar_buildyourown_con";
+    $table = "ri_intra_allindi_con";
 }
 $result=$db->select($table,[
-    "reporter","partner","year","dimension","score"
+    "reporter","partner","year","dimension","score","indicator"
 ],[
     "reporter"=>$reportMap,
     "partner"=>$partnerMap,
