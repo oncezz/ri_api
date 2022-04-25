@@ -24,5 +24,12 @@ $result=$db->select($table,[
     "reporter"=>$countryMap,
     "partner"=>$countryMap
 ]);
+
+// for($i=0; $i< $numIndication;$i++){
+//     $tempData[$i]['data']= rand(60,95);
+//     $tempData[$i]['catName'] = $subData[$i];
+//     $tempData[$i]['catNameLower'] = $subDataLower[$i];
+// }
+
 echo json_encode($result);
 ?>
