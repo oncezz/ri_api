@@ -1,13 +1,7 @@
 <?php
 require_once('../connection.php');
 $_POST = json_decode(file_get_contents("php://input"),true);
-$report=$_POST['report'];                   // country report
-$partner=$_POST['partner'];                 // country partner
-$dataBase=$_POST['dataBase'];               // database type  'digi'= DigiSRII  ,  'all'= ALL Data
-$compareType=$_POST['compareType'];         // 'group'= Economy group,  'specific'= report, partner ; when compare 'group' report=partner
-$disaggregation=$_POST['disaggregation'];   // 'pair'=Pair , 'dimension'=Dimension and indicator
 $integration=$_POST['integration'];         // "sustainable" / "conventional"
-
 //  set $dimensionData
 $dimensionData[0]['label']="Trade and investment";
 $dimensionData[1]['label']="Financial";
@@ -35,44 +29,5 @@ else{
     $dimensionData[5]['indicator']=['Sustainable regional FTA score', 'Sustainable regional IIA score' , 'Average intraregional rule of law index score', 'SDG trade regulatory distance from regional partners'];
     $dimensionData[6]['indicator']=['Average intraregional secure Internet servers','Average intraregional proportion of households with Internet access', 'Average intraregional share of female population with financial institution or mobile money account', 'Average intraregional share of female population that use Internet for online purchase'];
 }
-//
-for($i=0;$i<sizeof($report);$i++){
-
-    $result[$i]['iso']=$report[$i]['iso'];                        
-    $result[$i]['label']=$report[$i]['label'];
-    $sumPartner=0;
-    for($j=0;$j<sizeof($partner);$j++){
-        $result[$i]['partner'][$j]['iso']=$partner[$j]['iso'];
-        $result[$i]['partner'][$j]['label']=$partner[$j]['label'];
-
-        $sumDimension=0;
-        for($m=0;$m<sizeof($dimensionData);$m++){
-            $result[$i]['partner'][$j]['dimension'][$m]['label']=$dimensionData[$m]['label'];
-            $result[$i]['partner'][$j]['dimension'][$m]['iso']=m+1;
-            $sumIndicator=0;
-            for($n=0;$n<sizeof($dimensionData[$m]['indicator']);$n++){
-                $result[$i]['partner'][$j]['dimension'][$m]['indicator'][$n]['label']=$dimensionData[$m]['indicator'][$n];
-                $result[$i]['partner'][$j]['dimension'][$m]['indicator'][$n]['iso']=n+1;
-                if($report[$i]['iso']==$partner[$j]['iso']){
-                    $result[$i]['partner'][$j]['dimension'][$m]['indicator'][$n]['data']=-99 ;                   // return -  mean same country
-                }
-                else{
-                    $result[$i]['partner'][$j]['dimension'][$m]['indicator'][$n]['data']= rand(40,120) ;
-                    if($result[$i]['partner'][$j]['dimension'][$m]['indicator'][$n]['data']>115){
-                        $result[$i]['partner'][$j]['dimension'][$m]['indicator'][$n]['data']=0;                  // return  0 = No Data
-                    }
-                    else if($result[$i]['partner'][$j]['dimension'][$m]['indicator'][$n]['data']>100){
-                        $result[$i]['partner'][$j]['dimension'][$m]['indicator'][$n]['data']=100;
-                    }
-                }
-                $sumIndicator+= $result[$i]['partner'][$j]['dimension'][$m]['indicator'][$n]['data'];
-            }
-            $result[$i]['partner'][$j]['dimension'][$m]['avg']=$sumIndicator/sizeof($dimensionData[$m]['indicator']);
-            $sumDimension+=$result[$i]['partner'][$j]['dimension'][$m]['avg'];
-        }
-        $result[$i]['partner'][$j]['avg']=$sumDimension/sizeof($dimensionData);
-    }
-}
-
-echo json_encode($result);
+echo json_encode($dimensionData);
 ?>
