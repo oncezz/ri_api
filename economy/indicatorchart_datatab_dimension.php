@@ -1,19 +1,31 @@
 <?php
 require_once('../connection.php');
 $_POST = json_decode(file_get_contents("php://input"),true);
-
 $input=$_POST['input'];
-$data=$_POST['data'];
-$dimension=$_POST['dimension'];
-$index=$_POST['index']; 
+$reportMap=$_POST['reportMap'];
+$partnerMap=$_POST['partnerMap'];
+$dimensionIndex=$_POST['dimension'];
+$indicatorIndex=$_POST['index'];
 
+$type = $input["type"];
+$yearMax = $input['year']['max'];
+$yearMin = $input['year']['min'];
+// $diffYear = floor(($yearMax - $yearMin)/2);
 
-$numIndication=sizeof($data);
-for($i=0; $i< $numIndication;$i++){
-    $tempData[$i]['country']=$data[$i]['label'];
-    $tempData[$i]['data'][0]= rand(60,95)/100;
-    $tempData[$i]['data'][1]= rand(60,95)/100;
-    $tempData[$i]['dif']=$tempData[$i]['data'][1]-$tempData[$i]['data'][0];
+if($type == "Sustainable"){
+    $table = "ri_intra_allindi_sus";
+} else {
+    $table = "ri_intra_allindi_con";
 }
-echo json_encode($tempData);
+
+$result=$db->select($table,[
+    "reporter","partner","year","score"
+],[
+    "reporter"=>$reportMap,
+    "partner"=>$partnerMap,
+    "dimension"=>$dimensionIndex,
+    "indicator"=>$indicatorIndex,
+    "year[<>]"=>[$yearMin,$yearMax]
+]);
+echo json_encode($result);
 ?>
