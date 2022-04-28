@@ -1,11 +1,7 @@
 <?php
 require_once('../connection.php');
 $_POST = json_decode(file_get_contents("php://input"),true);
-$report=$_POST['report'];                   // country report
-$partner=$_POST['partner'];                 // country partner
-$dataBase=$_POST['dataBase'];               // database type  'digi'= DigiSRII  ,  'all'= ALL Data
 $integration=$_POST['integration'];         // "sustainable" / "conventional"
-
 //  set $dimensionData
 $dimensionData[0]['label']="Trade and investment";
 $dimensionData[1]['label']="Financial";
@@ -33,18 +29,5 @@ else{
     $dimensionData[5]['indicator']=['Sustainable regional FTA score', 'Sustainable regional IIA score' , 'Average intraregional rule of law index score', 'SDG trade regulatory distance from regional partners'];
     $dimensionData[6]['indicator']=['Average intraregional secure Internet servers','Average intraregional proportion of households with Internet access', 'Average intraregional share of female population with financial institution or mobile money account', 'Average intraregional share of female population that use Internet for online purchase'];
 }
-if($dataBase == 'digi'){
-    $table = "data_digi_indicator_";
-} else {
-    $table = "data_all_indicator_";
-}
-
-if($integration == "sustainable"){
-    $table .= "sus";
-} else {
-    $table .= "con";
-}
-$result = $db->select($table,"*",["report"=>$report, "partner"=>$partner]);
-
-echo json_encode($result);
+echo json_encode($dimensionData);
 ?>
