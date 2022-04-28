@@ -10,9 +10,9 @@ $year[1]=$input['year']['max'];
 $type=$input['type'];
 
 if($type == "Sustainable"){
-    $table = "ri_intra_allindi_sus";
+    $table = "ri_build_allindi_sus";
 } else {
-    $table = "ri_intra_allindi_con";
+    $table = "ri_build_allindi_con";
 }
 $result=$db->select($table,[
     "reporter","partner","year","dimension","score","indicator"
