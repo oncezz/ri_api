@@ -1,9 +1,8 @@
 <?php
 require_once('../connection.php');
 $_POST = json_decode(file_get_contents("php://input"),true);
-
+$selected=$_POST['selected'];
 $reportMap=$_POST['reporter'];
-$partnerMap=$_POST['partner'];
 $input=$_POST['input'];
 $dimension=$_POST['dim'];
 $year[0]=$input['year']['min'];
@@ -19,7 +18,7 @@ $result=$db->select($table,[
     "reporter","partner","year","dimension","score"
 ],[
     "reporter"=>$reportMap,
-    "partner"=>$partnerMap,
+    "partner"=>$selected,
     "dimension"=>$dimension,
     "year[<>]"=>$year
 ]);
