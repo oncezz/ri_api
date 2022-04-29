@@ -27,4 +27,16 @@ $db = new Medoo([
 	"charset" => "utf8",
 ]);
 
+// $db = new Medoo([
+// 	// required
+// 	'database_type' => 'mysql',
+// 	'database_name' => 'unescap',
+// 	'server' => 'localhost',
+// 	'port'=>3306,
+// 	'username' => 'admin_unescap',
+// 	'password' => '@Chomart12',
+// 	"charset" => "utf8",
+// ]);
+
+
 ?>
